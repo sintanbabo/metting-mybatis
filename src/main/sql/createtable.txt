@@ -1,0 +1,13 @@
+CREATE TABLE TB_METTING (
+    mettingRoomName VARCHAR(100) NOT NULL,
+    date DATE NOT NULL,
+    start DATE NOT NULL,
+    end DATE NOT NULL,
+    user VARCHAR(100),
+    cycleCount BIGINT,
+    PRIMARY KEY (mettingRoomName, date, start, end)
+);
+
+CREATE TABLE TB_METTING_ROOM (
+    mettingRoomName VARCHAR(100) PRIMARY KEY
+);
