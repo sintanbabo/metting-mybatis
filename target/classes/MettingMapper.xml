@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<mapper namespace="com.sintanbabo.metting.mapper.MettingMapper">
-    <select id="save" resulttype="com.sintanbabo.metting.model.MettingId">
-        select count(*) cnt from liveDocuments
-    </select>
-</mapper>

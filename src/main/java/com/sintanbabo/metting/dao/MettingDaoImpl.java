@@ -1,76 +1,54 @@
 package com.sintanbabo.metting.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
-import org.hibernate.query.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sintanbabo.metting.mapper.MettingMapper;
 import com.sintanbabo.metting.model.Metting;
-import com.sintanbabo.metting.model.MettingId;
 
-/*
- * 회의실 예약을 위한 Dao 구현
- */
 @Repository
 public class MettingDaoImpl implements MettingDao {
 
 	@Autowired
-	private SessionFactory sessionFactory;
+	private MettingMapper mettingMapper;
 
 	@Override
-	public MettingId save(Metting metting) {
-		sessionFactory.getCurrentSession().save(metting);
-		return metting.getId();
+	public int save(Metting metting) {
+		return mettingMapper.save(metting);
 	}
 
 	@Override
-	public Metting get(MettingId id) {
-		return sessionFactory.getCurrentSession().get(Metting.class, id);
+	public Metting get(HashMap<String,Object> map) {
+		return mettingMapper.get(map);
 	}
 
 	@Override
 	public List<Metting> list(Date date) {
-		Session session = sessionFactory.getCurrentSession();
-		CriteriaBuilder cb = session.getCriteriaBuilder();
-		CriteriaQuery<Metting> cq = cb.createQuery(Metting.class);
-		Root<Metting> root = cq.from(Metting.class);
-		cq.select(root);
-		Query<Metting> query = session.createQuery(cq);
-		return query.getResultList();
+		List<Metting> result = new ArrayList<Metting>();
+		result = mettingMapper.list(date);
+		return result;
 	}
 
 	@Override
-	public List<Metting> list() {
-		Session session = sessionFactory.getCurrentSession();
-		CriteriaBuilder cb = session.getCriteriaBuilder();
-		CriteriaQuery<Metting> cq = cb.createQuery(Metting.class);
-		Root<Metting> root = cq.from(Metting.class);
-		cq.select(root);
-		Query<Metting> query = session.createQuery(cq);
-		return query.getResultList();
+	public List<Metting> listAll() {
+		List<Metting> result = new ArrayList<Metting>();
+		result = mettingMapper.listAll();
+		return result;
 	}
 
 	@Override
-	public void update(MettingId id, Metting metting) {
-		Session session = sessionFactory.getCurrentSession();
-		Metting metting2 = session.byId(Metting.class).load(id);
-		metting2.setCycleCount(metting.getCycleCount());
-		metting2.setUser(metting.getUser());
-		session.flush();
+	public void update(Metting metting) {
+		mettingMapper.update(metting);
 	}
 
 	@Override
-	public void delete(MettingId id) {
-		Session session = sessionFactory.getCurrentSession();
-		Metting metting = session.byId(Metting.class).load(id);
-		session.delete(metting);
+	public void delete(HashMap<String,Object> map) {
+		mettingMapper.delete(map);
 	}	
 }

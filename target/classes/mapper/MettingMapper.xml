@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sintanbabo.metting.mapper.MettingMapper">
+	<resultMap type="com.sintanbabo.metting.model.Metting" id="MettingResultMap">
+		<result property="mettingRoomName" column="mettingRoomName" />
+		<result property="date" column="date" />
+		<result property="start" column="start" />
+		<result property="end" column="end" />
+		<result property="user" column="user" />
+		<result property="cycleCount" column="cycleCount" />
+	</resultMap>
+
+	<insert id="save" parameterType="com.sintanbabo.metting.model.Metting">
+		INSERT INTO TB_METTING(
+				mettingRoomName,date,start,end,user,cycleCount)
+		VALUELS(#{mettingRoomName},#{date},#{start},#{end},#{user},#{cycleCount});
+	</insert>
+	
+	<select id="get" resultMap="MettingResultMap" parameterType="hashmap">
+		SELECT	*
+		FROM	TB_METTING
+		WHERE	mettingRoomName = #{mettingRoomName}
+		AND		date = #{date}
+		AND		start = #{start}
+		AND		end = #{end}
+	</select>
+	
+	<select id="list" resultMap="MettingResultMap" parameterType="Date">
+		SELECT	*
+		FROM	TB_METTING
+		WHERE	date = #{date}
+	</select>
+	
+	<select id="listAll" resultMap="MettingResultMap">
+		SELECT	*
+		FROM	TB_METTING
+	</select>
+	
+	<update id="update" parameterType="com.sintanbabo.metting.model.Metting">
+		UPDATE	TB_METTING
+		SET		user = #{user},
+				cycleCount = #{cycleCount}
+		WHERE	mettingRoomName = #{mettingRoomName}
+		AND		date = #{date}
+		AND		start = #{start}
+		AND		end = #{end}
+	</update>
+	
+	<delete id="delete" parameterType="hashmap">
+		DELETE	TB_METTING
+		WHERE	mettingRoomName = #{mettingRoomName}
+		AND		date = #{date}
+		AND		start = #{start}
+		AND		end = #{end}
+	</delete>
+	
+</mapper>

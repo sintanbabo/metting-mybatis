@@ -1,10 +1,10 @@
 package com.sintanbabo.metting.dao;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import com.sintanbabo.metting.model.Metting;
-import com.sintanbabo.metting.model.MettingId;
 
 /*
  * 회의실 예약을 위한 Dao
@@ -12,20 +12,20 @@ import com.sintanbabo.metting.model.MettingId;
 public interface MettingDao {
 
 	// 회의실 예약 
-	MettingId save(Metting metting);
+	int save(Metting metting);
 	
 	// 회의실 예약 세부 확인 
-	Metting get(MettingId id);
+	Metting get(HashMap<String,Object> map);
 	
 	// 회의실 예약 확인 
 	List<Metting> list(Date date);
 	
 	// 회의실 예약 모두 확인 
-	List<Metting> list();
+	List<Metting> listAll();
 	
 	// 회의실 예약 변경
-	void update(MettingId id, Metting metting);
-	
+	void update(Metting metting);
+
 	// 회의실 예약 취소
-	void delete(MettingId id);
+	void delete(HashMap<String,Object> map);
 }

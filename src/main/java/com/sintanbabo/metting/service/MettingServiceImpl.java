@@ -1,6 +1,7 @@
 package com.sintanbabo.metting.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sintanbabo.metting.dao.MettingDao;
 import com.sintanbabo.metting.model.Metting;
-import com.sintanbabo.metting.model.MettingId;
 
 @Service
 @Transactional(readOnly=true)
@@ -20,13 +20,13 @@ public class MettingServiceImpl implements MettingService {
 	
 	@Transactional
 	@Override
-	public MettingId save(Metting metting) {
+	public int save(Metting metting) {
 		return mettingDao.save(metting);
 	}
 
 	@Override
-	public Metting get(MettingId id) {
-		return mettingDao.get(id);
+	public Metting get(HashMap<String,Object> map) {
+		return mettingDao.get(map);
 	}
 
 	@Override
@@ -35,19 +35,19 @@ public class MettingServiceImpl implements MettingService {
 	}
 
 	@Override
-	public List<Metting> list() {
-		return mettingDao.list();
+	public List<Metting> listAll() {
+		return mettingDao.listAll();
 	}
 
 	@Transactional
 	@Override
-	public void update(MettingId id, Metting metting) {
-		mettingDao.update(id, metting);
+	public void update(Metting metting) {
+		mettingDao.update(metting);
 	}
 
 	@Transactional
 	@Override
-	public void delete(MettingId id) {
-		mettingDao.delete(id);
+	public void delete(HashMap<String,Object> map) {
+		mettingDao.delete(map);
 	}
 }
