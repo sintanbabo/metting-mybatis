@@ -29,7 +29,7 @@ public class MettingController {
 		int result = mettingService.save(metting);
 		return ResponseEntity.ok()
 				.body("Metting Reservation be saved. Metting Room : " + metting.getMettingRoomName()
-						+ " Metting Date : " + metting.getDate() + " Metting Start : " + metting.getStart()
+						+ " Metting Start : " + metting.getStart()
 						+ " Metting End : " + metting.getEnd());
 	}
 
