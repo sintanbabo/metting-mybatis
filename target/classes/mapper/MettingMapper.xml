@@ -16,7 +16,7 @@
 	<insert id="save" parameterType="com.sintanbabo.metting.model.Metting">
 		INSERT INTO TB_METTING(
 				mettingRoomName,start,end,user,cycleCount)
-		VALUELS(#{mettingRoomName},#{start},#{end},#{user},#{cycleCount});
+		VALUES (#{mettingRoomName},#{start},#{end},#{user},#{cycleCount});
 	</insert>
 	
 	<select id="get" resultMap="MettingResultMap" parameterType="hashmap">

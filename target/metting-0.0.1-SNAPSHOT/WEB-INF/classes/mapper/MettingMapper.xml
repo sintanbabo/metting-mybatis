@@ -7,7 +7,6 @@
 <mapper namespace="com.sintanbabo.metting.mapper.MettingMapper">
 	<resultMap type="com.sintanbabo.metting.model.Metting" id="MettingResultMap">
 		<result property="mettingRoomName" column="mettingRoomName" />
-		<result property="date" column="date" />
 		<result property="start" column="start" />
 		<result property="end" column="end" />
 		<result property="user" column="user" />
@@ -16,15 +15,14 @@
 
 	<insert id="save" parameterType="com.sintanbabo.metting.model.Metting">
 		INSERT INTO TB_METTING(
-				mettingRoomName,date,start,end,user,cycleCount)
-		VALUELS(#{mettingRoomName},#{date},#{start},#{end},#{user},#{cycleCount});
+				mettingRoomName,start,end,user,cycleCount)
+		VALUES (#{mettingRoomName},#{start},#{end},#{user},#{cycleCount});
 	</insert>
 	
 	<select id="get" resultMap="MettingResultMap" parameterType="hashmap">
 		SELECT	*
 		FROM	TB_METTING
 		WHERE	mettingRoomName = #{mettingRoomName}
-		AND		date = #{date}
 		AND		start = #{start}
 		AND		end = #{end}
 	</select>
@@ -32,7 +30,7 @@
 	<select id="list" resultMap="MettingResultMap" parameterType="Date">
 		SELECT	*
 		FROM	TB_METTING
-		WHERE	date = #{date}
+		WHERE	start between #{date} and (#{date} + 1 - 1/24/60)
 	</select>
 	
 	<select id="listAll" resultMap="MettingResultMap">
@@ -45,7 +43,6 @@
 		SET		user = #{user},
 				cycleCount = #{cycleCount}
 		WHERE	mettingRoomName = #{mettingRoomName}
-		AND		date = #{date}
 		AND		start = #{start}
 		AND		end = #{end}
 	</update>
@@ -53,7 +50,6 @@
 	<delete id="delete" parameterType="hashmap">
 		DELETE	TB_METTING
 		WHERE	mettingRoomName = #{mettingRoomName}
-		AND		date = #{date}
 		AND		start = #{start}
 		AND		end = #{end}
 	</delete>
