@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.sintanbabo.metting.model.Metting;
+import com.sintanbabo.metting.model.MettingList;
 
 public interface MettingService {
 	// 회의실 예약
@@ -13,7 +14,7 @@ public interface MettingService {
 	Metting get(HashMap<String,Object> map) throws Exception;
 
 	// 회의실 예약 확인
-	List<Metting> list(String date) throws Exception;
+	List<MettingList> list(String date) throws Exception;
 
 	// 회의실 예약 모두 확인
 	List<Metting> listAll() throws Exception;

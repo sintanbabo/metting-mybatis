@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sintanbabo.metting.mapper.MettingMapper;
 import com.sintanbabo.metting.model.Metting;
+import com.sintanbabo.metting.model.MettingList;
 
 @Repository
 public class MettingDaoImpl implements MettingDao {
@@ -35,8 +36,8 @@ public class MettingDaoImpl implements MettingDao {
 	}
 
 	@Override
-	public List<Metting> list(String date) {
-		List<Metting> result = new ArrayList<Metting>();
+	public List<MettingList> list(String date) {
+		List<MettingList> result = new ArrayList<MettingList>();
 		result = mettingMapper.list(date);
 		return result;
 	}

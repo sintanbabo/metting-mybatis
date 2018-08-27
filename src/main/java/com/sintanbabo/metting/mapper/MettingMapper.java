@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.sintanbabo.metting.model.Metting;
+import com.sintanbabo.metting.model.MettingList;
 
 public interface MettingMapper {
 	// 회의실 예약
@@ -16,7 +17,7 @@ public interface MettingMapper {
 	int check(HashMap<String,Object> map);
 
 	// 회의실 예약 확인
-	List<Metting> list(String date);
+	List<MettingList> list(String date);
 
 	// 회의실 예약 모두 확인
 	List<Metting> listAll();

@@ -18,8 +18,11 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScans(value = { @ComponentScan("com.sintanbabo.metting.dao"),
-		@ComponentScan("com.sintanbabo.metting.service") })
+@ComponentScans(value = {
+		@ComponentScan("com.sintanbabo.metting.dao"),
+		@ComponentScan("com.sintanbabo.metting.service"),
+		@ComponentScan("com.sintanbabo.metting.log")
+		})
 @MapperScan("com.sintanbabo.metting.mapper")
 public class AppConfig {
 	@Bean

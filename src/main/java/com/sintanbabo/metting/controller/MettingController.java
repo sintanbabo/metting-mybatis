@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sintanbabo.metting.model.Metting;
+import com.sintanbabo.metting.model.MettingList;
 import com.sintanbabo.metting.service.MettingService;
 
 @RestController
@@ -45,8 +46,8 @@ public class MettingController {
 
 	// 일자에 해당하는 회의실 예약 정보 확인
 	@GetMapping("/metting/{date}")
-	public ResponseEntity<List<Metting>> list(@PathVariable("date") String date) throws Exception {
-		List<Metting> mettings = mettingService.list(date);
+	public ResponseEntity<List<MettingList>> list(@PathVariable("date") String date) throws Exception {
+		List<MettingList> mettings = mettingService.list(date);
 		return ResponseEntity.ok().body(mettings);
 	}
 

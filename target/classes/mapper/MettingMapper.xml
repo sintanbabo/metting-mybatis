@@ -12,6 +12,16 @@
 		<result property="user" column="user" />
 		<result property="cycleCount" column="cycleCount" />
 	</resultMap>
+	
+	<resultMap type="com.sintanbabo.metting.model.MettingList" id="MettingListResultMap">
+		<result property="mettingRoomName" column="mettingRoomName" />
+		<result property="date" column="date"/>
+		<result property="gubun" column="gubun"/>
+		<result property="start" column="start" />
+		<result property="end" column="end" />
+		<result property="user" column="user" />
+		<result property="cycleCount" column="cycleCount" />
+	</resultMap>
 
 	<insert id="save" parameterType="com.sintanbabo.metting.model.Metting">
 		INSERT INTO TB_METTING(
@@ -35,10 +45,30 @@
 		OR 		(#{start} <![CDATA[<=]]> START AND END <![CDATA[<=]]> #{end})
 	</select>
 	
-	<select id="list" resultMap="MettingResultMap" parameterType="String">
-		SELECT	*
-		FROM	TB_METTING
-		WHERE	start between concat(#{date},'000000') and concat(#{date},'235959')
+	<select id="list" resultMap="MettingListResultMap" parameterType="String">
+		SELECT	A.METTINGROOMNAME, A.DATE, A.GUBUN, B.START, B.END, B.USER, B.CYCLECOUNT
+		FROM   (SELECT	A.METTINGROOMNAME, B.DATE, B.GUBUN, B.START, B.END, B.CYCLE
+		        FROM	TB_METTING_ROOM A,
+		               (SELECT #{date} DATE, 'MORNING' GUBUN, '000000' START, '115959' END, 0 CYCLE FROM DUAL UNION ALL
+		                SELECT #{date} DATE, 'AFTERNOON' GUBUN, '120000' START, '235959' END, 0 CYCLE FROM DUAL) B) A
+		        LEFT OUTER JOIN
+		        TB_METTING B
+		ON		A.METTINGROOMNAME = B.METTINGROOMNAME
+		AND		SUBSTR(B.START,9) BETWEEN A.START AND A.END
+		AND		B.CYCLECOUNT = A.CYCLE
+		AND		B.START BETWEEN CONCAT(#{date},'000000') AND CONCAT(#{date},'235959')
+		UNION ALL
+		SELECT	A.METTINGROOMNAME, A.DATE, A.GUBUN, B.START, B.END, B.USER, B.CYCLECOUNT
+		FROM   (SELECT	A.METTINGROOMNAME, B.DATE, B.GUBUN, B.START, B.END, B.CYCLE
+		        FROM	TB_METTING_ROOM A,
+		               (SELECT #{date} DATE, 'CYCLE' GUBUN , '000000' START, '235959' END, 1 CYCLE FROM DUAL) B) A
+		        LEFT OUTER JOIN
+		        TB_METTING B
+		ON		A.METTINGROOMNAME = B.METTINGROOMNAME
+		AND		SUBSTR(B.START,9) BETWEEN A.START AND A.END
+		AND		B.CYCLECOUNT >= A.CYCLE
+		AND		B.START BETWEEN CONCAT(#{date},'000000') AND CONCAT(#{date},'235959')
+		ORDER BY METTINGROOMNAME, DATE, GUBUN
 	</select>
 	
 	<select id="listAll" resultMap="MettingResultMap">

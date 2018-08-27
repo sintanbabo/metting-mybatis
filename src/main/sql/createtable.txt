@@ -10,3 +10,27 @@ CREATE TABLE TB_METTING (
 CREATE TABLE TB_METTING_ROOM (
     mettingRoomName VARCHAR(100) PRIMARY KEY
 );
+
+INSERT INTO TB_METTING_ROOM(
+		mettingRoomName)
+VALUES ('mettingRoom1');
+
+INSERT INTO TB_METTING_ROOM(
+		mettingRoomName)
+VALUES ('mettingRoom2');
+
+INSERT INTO TB_METTING_ROOM(
+		mettingRoomName)
+VALUES ('mettingRoom3');
+
+INSERT INTO TB_METTING_ROOM(
+		mettingRoomName)
+VALUES ('mettingRoom4');
+
+INSERT INTO TB_METTING_ROOM(
+		mettingRoomName)
+VALUES ('mettingRoom5');
+
+INSERT INTO TB_METTING_ROOM(
+		mettingRoomName)
+VALUES ('mettingRoom6');
