@@ -1,7 +1,7 @@
 CREATE TABLE TB_METTING (
     mettingRoomName VARCHAR(100) NOT NULL,
-    start DATE NOT NULL,
-    end DATE NOT NULL,
+    start VARCHAR(14) NOT NULL,
+    end VARCHAR(14) NOT NULL,
     user VARCHAR(100),
     cycleCount BIGINT,
     PRIMARY KEY (mettingRoomName, start, end)

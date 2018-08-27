@@ -27,9 +27,15 @@ public class MettingDaoImpl implements MettingDao {
 	public Metting get(HashMap<String,Object> map) {
 		return mettingMapper.get(map);
 	}
+	
+	@Override
+	// 중복된 예약 확인
+	public int check(HashMap<String,Object> map) {
+		return mettingMapper.check(map);
+	}
 
 	@Override
-	public List<Metting> list(Date date) {
+	public List<Metting> list(String date) {
 		List<Metting> result = new ArrayList<Metting>();
 		result = mettingMapper.list(date);
 		return result;

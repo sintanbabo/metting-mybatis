@@ -1,6 +1,5 @@
 package com.sintanbabo.metting.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,21 +24,19 @@ public class MettingController {
 
 	// 회의실 예약
 	@PostMapping("/metting")
-	public ResponseEntity<?> save(@RequestBody Metting metting) {
-		int result = mettingService.save(metting);
-		return ResponseEntity.ok()
-				.body("Metting Reservation be saved. Metting Room : " + metting.getMettingRoomName()
-						+ " Metting Start : " + metting.getStart()
-						+ " Metting End : " + metting.getEnd());
+	public ResponseEntity<?> save(@RequestBody Metting metting) throws Exception{
+		mettingService.save(metting);
+		return ResponseEntity.ok().body("Metting Reservation be saved successfully.");
 	}
 
 	// 회의실 예약 확인
-	@GetMapping("/metting/{mettingRoomName}/{date}/{from}/{to}")
-	public ResponseEntity<Metting> get(@PathVariable("mettingRoomName") String mettingRoomName,
-			@PathVariable("date") Date date, @PathVariable("start") Date start, @PathVariable("end") Date end) {
+	@GetMapping("/metting/{mettingRoomName}/{start}/{end}")
+	public ResponseEntity<Metting> get(
+			@PathVariable("mettingRoomName") String mettingRoomName,
+			@PathVariable("start") String start,
+			@PathVariable("end") String end) throws Exception {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("mettingRoomName", mettingRoomName);
-		map.put("date",date);
 		map.put("start", start);
 		map.put("end", end);
 		Metting metting = mettingService.get(map);
@@ -48,34 +45,33 @@ public class MettingController {
 
 	// 일자에 해당하는 회의실 예약 정보 확인
 	@GetMapping("/metting/{date}")
-	public ResponseEntity<List<Metting>> list(Date date) {
+	public ResponseEntity<List<Metting>> list(@PathVariable("date") String date) throws Exception {
 		List<Metting> mettings = mettingService.list(date);
 		return ResponseEntity.ok().body(mettings);
 	}
 
 	// 일자와 상관없는 모든 회의실 예약 정보 확인
 	@GetMapping("/metting")
-	public ResponseEntity<List<Metting>> list() {
+	public ResponseEntity<List<Metting>> list() throws Exception {
 		List<Metting> mettings = mettingService.listAll();
 		return ResponseEntity.ok().body(mettings);
 	}
 
 	// 회의실 예약 정보 수정
-	@PutMapping("/metting/{mettingRoomName}/{date}/{from}/{to}")
-	public ResponseEntity<?> update(@PathVariable("mettingRoomName") String mettingRoomName,
-			@PathVariable("date") Date date, @PathVariable("start") Date start, @PathVariable("end") Date end,
-			@RequestBody Metting metting) {
+	@PutMapping("/metting")
+	public ResponseEntity<?> update(@RequestBody Metting metting) throws Exception {
 		mettingService.update(metting);
 		return ResponseEntity.ok().body("Metting Reservation has been updated successfully.");
 	}
 
 	// 회의실 예약 정보 삭제
-	@DeleteMapping("/metting")
-	public ResponseEntity<?> delete(@PathVariable("mettingRoomName") String mettingRoomName,
-			@PathVariable("date") Date date, @PathVariable("start") Date start, @PathVariable("end") Date end) {
+	@DeleteMapping("/metting/{mettingRoomName}/{start}/{end}")
+	public ResponseEntity<?> delete(
+			@PathVariable("mettingRoomName") String mettingRoomName,
+			@PathVariable("start") String start,
+			@PathVariable("end") String end) throws Exception {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("mettingRoomName", mettingRoomName);
-		map.put("date",date);
 		map.put("start", start);
 		map.put("end", end);
 		mettingService.delete(map);

@@ -27,10 +27,18 @@
 		AND		end = #{end}
 	</select>
 	
-	<select id="list" resultMap="MettingResultMap" parameterType="Date">
+	<select id="check" resultType="java.lang.Integer" parameterType="hashmap">
+		SELECT	COUNT(*)
+		FROM	TB_METTING
+		WHERE	(START <![CDATA[<]]> #{start} AND #{start} <![CDATA[<]]> END)
+		OR		(START <![CDATA[<]]> #{end} AND #{end} <![CDATA[<]]> END)
+		OR 		(#{start} <![CDATA[<=]]> START AND END <![CDATA[<=]]> #{end})
+	</select>
+	
+	<select id="list" resultMap="MettingResultMap" parameterType="String">
 		SELECT	*
 		FROM	TB_METTING
-		WHERE	start between #{date} and (#{date} + 1 - 1/24/60)
+		WHERE	start between concat(#{date},'000000') and concat(#{date},'235959')
 	</select>
 	
 	<select id="listAll" resultMap="MettingResultMap">
@@ -48,7 +56,7 @@
 	</update>
 	
 	<delete id="delete" parameterType="hashmap">
-		DELETE	TB_METTING
+		DELETE FROM TB_METTING
 		WHERE	mettingRoomName = #{mettingRoomName}
 		AND		start = #{start}
 		AND		end = #{end}

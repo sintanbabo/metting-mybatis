@@ -1,6 +1,5 @@
 package com.sintanbabo.metting.service;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,20 +7,20 @@ import com.sintanbabo.metting.model.Metting;
 
 public interface MettingService {
 	// 회의실 예약
-	int save(Metting metting);
+	void save(Metting metting) throws Exception;
 
 	// 회의실 예약 세부 확인
-	Metting get(HashMap<String,Object> map);
+	Metting get(HashMap<String,Object> map) throws Exception;
 
 	// 회의실 예약 확인
-	List<Metting> list(Date date);
+	List<Metting> list(String date) throws Exception;
 
 	// 회의실 예약 모두 확인
-	List<Metting> listAll();
+	List<Metting> listAll() throws Exception;
 
 	// 회의실 예약 변경
-	void update(Metting metting);
+	void update(Metting metting) throws Exception;
 
 	// 회의실 예약 취소
-	void delete(HashMap<String,Object> map);
+	void delete(HashMap<String,Object> map) throws Exception;
 }
