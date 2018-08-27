@@ -5,7 +5,6 @@ import java.util.Date;
 public class Metting {
 
 	private String mettingRoomName;
-	private Date date;
 	private Date start;
 	private Date end;
 	private String user;
@@ -17,14 +16,6 @@ public class Metting {
 
 	public void setMettingRoomName(String mettingRoomName) {
 		this.mettingRoomName = mettingRoomName;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public Date getStart() {
