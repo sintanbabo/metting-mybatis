@@ -27,8 +27,8 @@
 - Apache Tomcat  7.0.47 (Embedded) 
 
 ## 문제 해결 방법
-- Metting Table : PK<Metting Room Name, Start, End>, User, cycleCount
-- Metting Room Table : PK <Metting Room Name> 
+- Metting Table : **Metting Room Name, Start, End**, User, cycleCount
+- Metting Room Table : **Metting Room Name** 
 - 회의실 예약 시, Start, End 2개의 값을 Date 값으로 저장함으로써, End 와 Start 간 30분 차이가 있는지 확인
 - 회의실 예약 시, Start, End 2개의 값을 이용해서 일자가 넘어가서 예약이 될 경우도 처리 (예 : 2018-08-27 11:30 ~ 2018-08-28 00:30)
 - 회의실 예약 내역 확인 시, Metting Room Table 을 이용해서 예약이 이루어지 않은 회의실에 대한 정보도 조회할 수 있도로 함
